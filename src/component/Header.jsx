@@ -107,7 +107,14 @@ export default function Header() {
                 </Button>
                 <Button
                   onClick={() => setAuth(true)}
-                  sx={{ color: "white", background: "black" }}
+                  sx={{
+                    marginLeft:'10px',
+                    color: "white",
+                    backgroundColor: "#000000d1",
+                    "&:hover": {
+                      backgroundColor: "black",
+                    }
+                  }}
                   variant="contained"
                 >
                   Sign up
