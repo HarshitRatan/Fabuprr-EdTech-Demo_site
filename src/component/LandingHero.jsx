@@ -23,6 +23,9 @@ const LandingHero = () => {
             Break into a new field like information technology or data science.
             No prior experience necessary to get started.
           </Typography>
+          <Typography variant="h6" sx={{marginTop:'25px', color:'#b30000ed', fontWeight: "800"}}>
+            Please Login To See DashBoard Page.
+          </Typography>
 
           <Stack
             direction="row"

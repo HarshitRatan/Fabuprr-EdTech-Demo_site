@@ -4,6 +4,7 @@ import FacebookIcon from "@mui/icons-material/Facebook";
 import EmailIcon from "@mui/icons-material/Email";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import InstagramIcon from "@mui/icons-material/Instagram";
+import AddIcCallIcon from '@mui/icons-material/AddIcCall';
 
 const Footer = () => {
   return (
@@ -31,6 +32,7 @@ const Footer = () => {
         <EmailIcon />
         <LinkedInIcon />
         <InstagramIcon />
+        <AddIcCallIcon/>
       </Stack>
     </Stack>
   );
