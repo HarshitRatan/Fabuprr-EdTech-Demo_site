@@ -9,12 +9,16 @@ import AccountCircle from "@mui/icons-material/AccountCircle";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
 import Stack from "@mui/material/Stack";
+import { useNavigate } from "react-router-dom";
+import CircularProgress from "@mui/material/CircularProgress";
 
 export default function Header() {
+  const navigate = useNavigate();
   const [auth, setAuth] = React.useState(false);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [anchorElMenu, setAnchorElMenu] = React.useState(null);
   const [menuButtonDisplay, setMenuButtonDisplay] = React.useState(false);
+  const [loginLoading, setLoginLoading] = React.useState(false);
 
   const menuItemsValue = ["Home", "Explore", "Resources"];
 
@@ -93,7 +97,19 @@ export default function Header() {
               </MenuItem>
             </span>
           ))}
-          {!auth && (
+
+          {loginLoading && (
+            <Stack
+              direction="row"
+              justifyContent="flex-end"
+              alignItems="center"
+              spacing={2}
+              sx={{ width: "100%" }}
+            >
+              <CircularProgress />
+            </Stack>
+          )}
+          {!loginLoading && !auth && (
             <Stack
               direction="row"
               justifyContent="flex-end"
@@ -102,18 +118,33 @@ export default function Header() {
               sx={{ width: "100%" }}
             >
               <Box>
-                <Button onClick={() => setAuth(true)} color="inherit">
+                <Button
+                  onClick={() => {
+                    setLoginLoading(true);
+                    setTimeout(() => {
+                      setAuth(true);
+                      setLoginLoading(false);
+                    }, 1000);
+                  }}
+                  color="inherit"
+                >
                   Login
                 </Button>
                 <Button
-                  onClick={() => setAuth(true)}
+                  onClick={() => {
+                    setLoginLoading(true);
+                    setTimeout(() => {
+                      setAuth(true);
+                      setLoginLoading(false);
+                    }, 1000);
+                  }}
                   sx={{
-                    marginLeft:'10px',
+                    marginLeft: "10px",
                     color: "white",
                     backgroundColor: "#000000d1",
                     "&:hover": {
                       backgroundColor: "black",
-                    }
+                    },
                   }}
                   variant="contained"
                 >
@@ -122,7 +153,7 @@ export default function Header() {
               </Box>
             </Stack>
           )}
-          {auth && (
+          {!loginLoading && auth && (
             <Stack
               direction="row"
               justifyContent="flex-end"
@@ -151,11 +182,24 @@ export default function Header() {
                 open={Boolean(anchorEl)}
                 onClose={handleCloseLogin}
               >
-                <MenuItem onClick={handleCloseLogin}>Go To DashBoard</MenuItem>
                 <MenuItem
                   onClick={() => {
-                    setAuth(false);
-                    setAnchorEl(null);
+                    navigate("/dashboard");
+                    handleCloseLogin();
+                  }}
+                >
+                  Go To DashBoard
+                </MenuItem>
+                <MenuItem
+                  onClick={() => {
+                    setLoginLoading(true);
+                    setTimeout(() => {
+                      setAuth(false);
+                      setAnchorEl(null);
+                      navigate("/");
+                      setLoginLoading(false);
+                      handleCloseLogin();
+                    }, 1000);
                   }}
                 >
                   Log out
