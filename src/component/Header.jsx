@@ -11,6 +11,7 @@ import Menu from "@mui/material/Menu";
 import Stack from "@mui/material/Stack";
 import { useNavigate } from "react-router-dom";
 import CircularProgress from "@mui/material/CircularProgress";
+import { Link } from "react-router-dom";
 
 export default function Header() {
   const navigate = useNavigate();
@@ -78,7 +79,9 @@ export default function Header() {
               onClose={handleClose}
             >
               {menuItemsValue.map((values) => (
-                <MenuItem key={values}>{values}</MenuItem>
+                <Link to={`/`} key={values} sx={{ textDecoration: "none" }}>
+                  <MenuItem sx={{ color: "black" }}>{values}</MenuItem>
+                </Link>
               ))}
             </Menu>
           </Box>
@@ -92,9 +95,16 @@ export default function Header() {
 
           {menuItemsValue.map((values) => (
             <span key={values}>
-              <MenuItem sx={{ display: menuButtonDisplay ? "none" : "inline" }}>
-                {values}
-              </MenuItem>
+              <Link to={`/`} key={values} sx={{ textDecoration: "none" }}>
+                <MenuItem
+                  sx={{
+                    display: menuButtonDisplay ? "none" : "inline",
+                    color: "black",
+                  }}
+                >
+                  {values}
+                </MenuItem>
+              </Link>
             </span>
           ))}
 
@@ -124,6 +134,7 @@ export default function Header() {
                     setTimeout(() => {
                       setAuth(true);
                       setLoginLoading(false);
+                      navigate("/dashBoard");
                     }, 1000);
                   }}
                   color="inherit"
@@ -136,6 +147,7 @@ export default function Header() {
                     setTimeout(() => {
                       setAuth(true);
                       setLoginLoading(false);
+                      navigate("/dashBoard");
                     }, 1000);
                   }}
                   sx={{
